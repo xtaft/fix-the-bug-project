@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://objmy2rjtptu"]
 
 [ext_resource type="Script" path="res://fix_the_bug_minigame/bonuses/Bonus.gd" id="1_87lot"]
-[ext_resource type="Texture2D" uid="uid://cyrf2u86crfa5" path="res://fix_the_bug_minigame/bonuses/timeBonus.png" id="2_4d4dp"]
-[ext_resource type="Texture2D" uid="uid://dg6nvvgjapab5" path="res://fix_the_bug_minigame/bonuses/healthBonus (2).png" id="3_5e1pb"]
-[ext_resource type="Texture2D" uid="uid://dwjmtuj5ie1x4" path="res://fix_the_bug_minigame/bonuses/copilotBonus.png" id="4_kuina"]
-[ext_resource type="Texture2D" uid="uid://bxkbte2vbwqbu" path="res://fix_the_bug_minigame/bonuses/coinBonus.png" id="5_8xmd0"]
+[ext_resource type="Texture2D" uid="uid://bla6tujs5vwaq" path="res://fix_the_bug_minigame/bonuses/bonus_copilot.png" id="2_cuhku"]
+[ext_resource type="Texture2D" uid="uid://bcw5fp6iewlr6" path="res://fix_the_bug_minigame/bonuses/bonus_time.png" id="2_dbxdx"]
+[ext_resource type="Texture2D" uid="uid://bwthrpqhpvdy0" path="res://fix_the_bug_minigame/bonuses/bonus_health.png" id="2_ec3uo"]
+[ext_resource type="Texture2D" uid="uid://b2wmpcme1aj7q" path="res://fix_the_bug_minigame/bonuses/bonus_coins.png" id="2_noat1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nxidb"]
 radius = 53.0094
@@ -38,7 +38,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_8xmd0")]
+"values": [ExtResource("2_noat1")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -79,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_kuina")]
+"values": [ExtResource("2_cuhku")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -120,7 +120,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_5e1pb")]
+"values": [ExtResource("2_ec3uo")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -161,7 +161,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_4d4dp")]
+"values": [ExtResource("2_dbxdx")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -198,8 +198,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lrkgb"]
-radius = 27.9697
-height = 63.5076
+radius = 48.0
+height = 96.0
 
 [node name="Bonus" type="Area2D"]
 script = ExtResource("1_87lot")
@@ -213,8 +213,9 @@ one_shot = true
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_4d4dp")
+position = Vector2(0, 2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_dbxdx")
 hframes = 30
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -225,7 +226,6 @@ libraries = {
 [node name="BonusArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonusArea"]
-position = Vector2(-5.88627, 0.140152)
 shape = SubResource("CapsuleShape2D_lrkgb")
 
 [connection signal="timeout" from="visibilityTimer" to="." method="_on_visibility_timer_timeout"]
