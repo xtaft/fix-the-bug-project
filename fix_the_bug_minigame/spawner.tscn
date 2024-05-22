@@ -23,7 +23,7 @@ curve = SubResource("Curve2D_ty2jr")
 [node name="CharacterSpawnLocation" type="PathFollow2D" parent="CharacterSpawnPath"]
 
 [node name="BonusSpawnPath" type="Path2D" parent="."]
-position = Vector2(0, 45)
+position = Vector2(64, 64)
 scale = Vector2(1, 0.921875)
 curve = SubResource("Curve2D_xjdnl")
 
