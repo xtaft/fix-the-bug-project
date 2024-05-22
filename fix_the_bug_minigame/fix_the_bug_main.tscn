@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://dknutwtkaxnn8"]
+
+[ext_resource type="Script" path="res://fix_the_bug_minigame/fix_the_bug_main.gd" id="1_uadux"]
+[ext_resource type="Texture2D" uid="uid://rk7dknrrdkyy" path="res://fix_the_bug_minigame/graphics/bg2.jpg" id="2_ghtrm"]
+[ext_resource type="PackedScene" uid="uid://bkqcs3uww747a" path="res://fix_the_bug_minigame/spawner.tscn" id="4_3gi7s"]
+[ext_resource type="Texture2D" uid="uid://opemu6v7rhlt" path="res://fix_the_bug_minigame/graphics/teleport.png" id="4_6rs73"]
+[ext_resource type="Texture2D" uid="uid://0d4i0wom0jjp" path="res://fix_the_bug_minigame/graphics/ring_light_texture.png" id="5_k264f"]
+[ext_resource type="PackedScene" uid="uid://cl3llj2h0g0ta" path="res://fix_the_bug_minigame/graphics/new_game.tscn" id="6_pq3ma"]
+[ext_resource type="Texture2D" uid="uid://bfj5xm2vgy85a" path="res://fix_the_bug_minigame/graphics/hud_bar_hollow.png" id="7_dxbet"]
+[ext_resource type="Texture2D" uid="uid://ct22wc5fcu4i0" path="res://fix_the_bug_minigame/graphics/hud_bar.png" id="8_bk7rp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dytd6"]
+radius = 197.334
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_th3xv"]
+bg_color = Color(0.6, 0.6, 0.6, 0.176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.760784, 0.760784, 0.760784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1o7xn"]
+bg_color = Color(0, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.762404, 0.762404, 0.762403, 1)
+border_blend = true
+
+[node name="FixTheBugMain" type="Node2D"]
+script = ExtResource("1_uadux")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(634, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ghtrm")
+
+[node name="Teleport" type="Area2D" parent="."]
+position = Vector2(634.092, 361.26)
+scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="Teleport"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_6rs73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Teleport"]
+shape = SubResource("CircleShape2D_dytd6")
+
+[node name="PointLight2D" type="PointLight2D" parent="Teleport"]
+scale = Vector2(2.2, 2.2)
+color = Color(1, 0.694118, 0.776471, 1)
+energy = 2.0
+texture = ExtResource("5_k264f")
+
+[node name="Spawner" parent="." instance=ExtResource("4_3gi7s")]
+scale = Vector2(1.1, 1.1)
+
+[node name="ProcessSpawnTimer" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
+[node name="Processes" type="Node2D" parent="."]
+
+[node name="BugSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Bugs" type="Node2D" parent="."]
+
+[node name="BonusSpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Bonuses" type="Node2D" parent="."]
+
+[node name="TimeBonusTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="NewGame" parent="." instance=ExtResource("6_pq3ma")]
+offset_left = 641.388
+offset_top = 346.059
+offset_right = 641.388
+offset_bottom = 346.059
+
+[node name="Health" type="Node2D" parent="."]
+position = Vector2(772.287, -1.10803)
+scale = Vector2(1, 1.4)
+
+[node name="HealthBar" type="ProgressBar" parent="Health"]
+offset_left = 28.5003
+offset_top = 27.6406
+offset_right = 359.503
+offset_bottom = 54.6406
+scale = Vector2(1.2, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_th3xv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1o7xn")
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Health"]
+position = Vector2(228.131, 41.3572)
+rotation = 3.14159
+scale = Vector2(2.4, 1.5)
+texture = ExtResource("7_dxbet")
+
+[node name="Score" type="Node2D" parent="."]
+position = Vector2(251.019, 58.434)
+
+[node name="Sprite2D" type="Sprite2D" parent="Score"]
+scale = Vector2(2.1, -1.8)
+texture = ExtResource("8_bk7rp")
+
+[node name="ScoreLabel" type="Label" parent="Score"]
+offset_left = -17.2856
+offset_top = -22.0333
+offset_right = 22.7144
+offset_bottom = 22.9667
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="SpawningWaveTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="bug_teleported" from="." to="." method="_on_bug_teleported"]
+[connection signal="bug_transformed" from="." to="." method="_on_bug_transformed"]
+[connection signal="coin_collected" from="." to="." method="_on_coin_collected"]
+[connection signal="copilot_collected" from="." to="." method="_on_copilot_collected"]
+[connection signal="process_hit" from="." to="." method="_on_process_hit"]
+[connection signal="process_teleported" from="." to="." method="_on_process_teleported"]
+[connection signal="time_collected" from="." to="." method="_on_time_collected"]
+[connection signal="timeout" from="ProcessSpawnTimer" to="." method="_on_process_spawn_timer_timeout"]
+[connection signal="timeout" from="BugSpawnTimer" to="." method="_on_bug_spawn_timer_timeout"]
+[connection signal="timeout" from="BonusSpawnTimer" to="." method="_on_bonus_spawn_timer_timeout"]
+[connection signal="timeout" from="TimeBonusTimer" to="." method="_on_time_bonus_timer_timeout"]
+[connection signal="new_game" from="NewGame" to="." method="_on_new_game_new_game"]
+[connection signal="timeout" from="SpawningWaveTimer" to="." method="_on_spawning_wave_timer_timeout"]

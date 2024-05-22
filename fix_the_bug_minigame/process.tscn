@@ -1,0 +1,205 @@
+[gd_scene load_steps=17 format=3 uid="uid://con3tu1rg1bxo"]
+
+[ext_resource type="Script" path="res://fix_the_bug_minigame/process.gd" id="1_5t11j"]
+[ext_resource type="Texture2D" uid="uid://dw0ks72b71e8m" path="res://characters/process/teleport_process_spritesheet.png" id="2_8ghvp"]
+[ext_resource type="Texture2D" uid="uid://cdhko52ek6bwe" path="res://characters/process/walk_process_sps.png" id="2_hfaim"]
+
+[sub_resource type="Animation" id="Animation_vsaee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_obkbq"]
+resource_name = "teleport"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8ghvp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_pb630"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hfaim")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.54, 0.57, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qggsm"]
+_data = {
+"RESET": SubResource("Animation_vsaee"),
+"teleport": SubResource("Animation_obkbq"),
+"walk": SubResource("Animation_pb630")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_by00o"]
+radius = 22.9196
+height = 52.0717
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5nk3"]
+radius = 23.1404
+height = 51.849
+
+[sub_resource type="Gradient" id="Gradient_3kpqc"]
+offsets = PackedFloat32Array(0.533981, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6eore"]
+gradient = SubResource("Gradient_3kpqc")
+
+[sub_resource type="Gradient" id="Gradient_fmik0"]
+offsets = PackedFloat32Array(0.529126, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yp1qm"]
+gradient = SubResource("Gradient_fmik0")
+
+[sub_resource type="Curve" id="Curve_k5crv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m47g7"]
+curve = SubResource("Curve_k5crv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yccyv"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 59.32
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 150.0
+angular_velocity_max = 36.46
+gravity = Vector3(0, 0, 0)
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_m47g7")
+color = Color(0.921569, 0, 0.27451, 1)
+color_ramp = SubResource("GradientTexture1D_yp1qm")
+color_initial_ramp = SubResource("GradientTexture1D_6eore")
+
+[node name="Process" type="CharacterBody2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_5t11j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_hfaim")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_qggsm")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.44771, 0)
+shape = SubResource("CapsuleShape2D_by00o")
+
+[node name="ProcessArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProcessArea"]
+position = Vector2(-1.33635, 0)
+shape = SubResource("CapsuleShape2D_d5nk3")
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_yccyv")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="ProcessArea" to="." method="_on_process_area_area_entered"]
+[connection signal="input_event" from="ProcessArea" to="." method="_on_process_area_input_event"]

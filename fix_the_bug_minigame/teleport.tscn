@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5hbdkvfq4wvj"]
+
+[ext_resource type="Texture2D" uid="uid://opemu6v7rhlt" path="res://fix_the_bug_minigame/graphics/teleport.png" id="1_xbjca"]
+[ext_resource type="Texture2D" uid="uid://0d4i0wom0jjp" path="res://fix_the_bug_minigame/graphics/ring_light_texture.png" id="2_ptl52"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ys8ta"]
+radius = 285.543
+
+[node name="Teleport" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_xbjca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ys8ta")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(2.2, 2.2)
+color = Color(1, 0.694118, 0.792157, 0.427451)
+energy = 5.0
+texture = ExtResource("2_ptl52")

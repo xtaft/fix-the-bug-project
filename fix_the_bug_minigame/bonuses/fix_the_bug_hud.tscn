@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://di2thdatd37pc"]
+
+[ext_resource type="Shader" path="res://fix_the_bug_minigame/graphics/fix_the_bug_hud.gdshader" id="1_hwb3b"]
+[ext_resource type="Script" path="res://fix_the_bug_minigame/fix_the_bug_hud.gd" id="1_sy5sm"]
+[ext_resource type="Texture2D" uid="uid://eyovxdvvx35t" path="res://fix_the_bug_minigame/graphics/debug button.png" id="2_mcywg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp7xb"]
+render_priority = 0
+shader = ExtResource("1_hwb3b")
+
+[node name="NewGame" type="Control"]
+material = SubResource("ShaderMaterial_rp7xb")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sy5sm")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_rp7xb")
+layout_mode = 0
+offset_left = 208.0
+offset_top = 152.0
+offset_right = 248.0
+offset_bottom = 192.0
+scale = Vector2(22, 10.3)
+
+[node name="FixTheBug" type="Label" parent="."]
+material = SubResource("ShaderMaterial_rp7xb")
+layout_mode = 0
+offset_left = 544.0
+offset_top = 256.0
+offset_right = 755.0
+offset_bottom = 314.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Fix the Bug"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+material = SubResource("ShaderMaterial_rp7xb")
+layout_mode = 0
+offset_left = 656.0
+offset_top = 416.0
+offset_right = 664.0
+offset_bottom = 424.0
+theme_override_font_sizes/font_size = 24
+
+[node name="Sprite2D" type="Sprite2D" parent="Button"]
+material = SubResource("ShaderMaterial_rp7xb")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_mcywg")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
