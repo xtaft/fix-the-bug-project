@@ -69,7 +69,6 @@ func _on_bug_spawn_timer_timeout():
 	bug.add_to_group("Bugs")
 	$Spawner.spawn_character(bug, $Bugs)
 	bug.speed = character_speed
-	bug.pos = $Teleport.position
 	bug.connect("bug_transformed", _on_bug_transformed)
 	bug.connect("bug_teleported", _on_bug_teleported)
 
@@ -79,7 +78,6 @@ func _on_process_spawn_timer_timeout():
 	proc.add_to_group("Processes")
 	$Spawner.spawn_character(proc, $Processes)
 	proc.speed = character_speed
-	proc.pos = $Teleport.position
 	proc.connect("process_hit", _on_process_hit)
 	proc.connect("process_teleported", _on_process_teleported)
 	
@@ -90,14 +88,13 @@ func _on_process_teleported():
 	pass
 
 
-func _on_bug_transformed(pos):
+func _on_bug_transformed(bug_pos):
 	score += 55
 	var proc = FixTheBugGlobal.process.instantiate()
-	proc.position = pos
 	proc.add_to_group("Processes")
 	$Processes.add_child(proc)
+	proc.position = bug_pos
 	proc.speed = character_speed
-	proc.pos = $Teleport.position
 	
 func _on_bug_teleported():
 	health -= health_damage

@@ -4,17 +4,15 @@ signal bug_transformed
 signal bug_teleported
 
 @export var speed = 80
-@export var pos = Vector2(0,0)
 
 
 func _ready():
 	$AnimationPlayer.play("walk")
-	pos = Vector2(0,0)
 
 	
 func _physics_process(delta):
-	rotation = position.angle_to_point(pos)
-	var movement = speed * position.direction_to(pos) * delta
+	rotation = position.angle_to_point(get_viewport_rect().size / 2.0)
+	var movement = speed * position.direction_to(get_viewport_rect().size / 2.0) * delta
 	var _collision = move_and_collide(movement)
 
 
